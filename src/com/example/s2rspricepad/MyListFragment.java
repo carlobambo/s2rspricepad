@@ -26,12 +26,6 @@ public class MyListFragment extends ListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-//		ds = new ItemsDataSource(getActivity());
-//		ds.open();
-//		
-//		List<Item> items = ds.getAllItems();
-//		ItemAdapter adapter = new ItemAdapter(getActivity(), items);
-//		setListAdapter(adapter);
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 

@@ -20,13 +20,13 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 	public View getView(int position, View convertView, ViewGroup parent){
 		TextView itemName;
 		TextView price;
-		Boolean isSectionHeader = getItem(position) instanceof SectionHeader || getItem(position).getClass() == SectionHeader.class;
+		Boolean isSectionHeader = getItem(position) instanceof ListActivity.SectionHeader || getItem(position).getClass() == ListActivity.SectionHeader.class;
 		int layoutID = isSectionHeader? R.layout.section_header: R.layout.fragment_list;
-//		if(convertView == null) {
+		if(convertView == null || (convertView.findViewById(R.id.price) == null && isSectionHeader)) {
 			LayoutInflater inflater = LayoutInflater.from(getContext());
 			convertView = inflater.inflate(layoutID, parent, false);
 //			convertView.setTag(viewHolder);	
-//		}
+		}
 		Item item = getItem(position);
 		itemName = (TextView) convertView.findViewById(R.id.itemName);
 		itemName.setText(item.getItemName());
@@ -38,7 +38,6 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 		return convertView;
 	}
 	public void addItem(Item item){
-		int count = this.getCount();
 		if(this.getCount() < 1){
 			//add a section
 			createSection(item.getCategory());
@@ -51,10 +50,14 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 	public void createSection(String name){
 		this.add(new SectionHeader(name));
 	}
-	class SectionHeader extends Item{
+	public class SectionHeader extends Item{
 		public SectionHeader(String name){
 			this.setItemName(name);
 		}
+	}
+	class ViewHolder{
+		TextView itemName;
+		TextView price;
 	}
 		
 }
